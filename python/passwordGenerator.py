@@ -3,7 +3,6 @@ import string
 
 #Not a very strong password generator. creates list containing all letters, uppercase and
 #lowercase, special characters and digits. 
-#listCHar has 94 entires
 #random.seed is needed to initialize the rand. num gen.
 
 #TODO:
@@ -13,35 +12,56 @@ import string
 
 random.seed()
 characters = list(string.ascii_letters)
+random.shuffle(characters)
+
 digits = list(string.digits)
+random.shuffle(digits)
+
 specialChar = list(string.punctuation)
+random.shuffle(specialChar)
 
 password = ""
 
 print("||||||Password Generator||||||")
-length = input("How many characters would you like the password to have?: ")
-length = int(length)
+while(True):
 
-#characters
+    print("Passwords must be at least 8 characters long and will contain 2\nspecial character and 1 digit.")
+    length = input("How many characters would you like the password to have?: ")
+    try:
+        length = int(length)
+        if(length<8):
+            print("Sorry, no numbers less than 8. Try again!\n")
+        else:
+            break
+    except ValueError:
+        print("You must input a number!\n")
+    
+
+
+#characters 52 entries
 for x in range(length - 3):
     randNum = random.randint(0, 51)
     getChar = characters[randNum]
     password = password + (getChar)
 
-#special characters
+#special characters 32 entries
 for x in range(2):
     randNum = random.randint(0, 31)
     getSpec = specialChar[randNum]
     password = password + (getSpec)
 
-#digits
+#digits 10 entries
 randNum = random.randint(0, 9)
 getDig = digits[randNum]
 password = password + (getDig)
 
+#converts password string(array) to list to shuffle
+#then converts back to string(array)
+p = list(password)
+password = list(p)
+random.shuffle(p)
+result = ''.join(p)
 
-#random.shuffle(password)
 
 
-
-print("Generated: "+password+"\n")
+print("Generated: "+result+"\n")
