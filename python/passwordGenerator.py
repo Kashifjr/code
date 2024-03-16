@@ -12,11 +12,9 @@ import string
 #try and catch
 
 random.seed()
-listChar = list(string.ascii_letters)
-tempList = list(string.digits)
-listChar.extend(tempList)
-tempList = list(string.punctuation)
-listChar.extend(tempList)
+characters = list(string.ascii_letters)
+digits = list(string.digits)
+specialChar = list(string.punctuation)
 
 password = ""
 
@@ -24,11 +22,26 @@ print("||||||Password Generator||||||")
 length = input("How many characters would you like the password to have?: ")
 length = int(length)
 
-for x in range(length):
-    randNum = random.randint(0, 94)
-    getChar = listChar[randNum]
+#characters
+for x in range(length - 3):
+    randNum = random.randint(0, 51)
+    getChar = characters[randNum]
     password = password + (getChar)
-    
+
+#special characters
+for x in range(2):
+    randNum = random.randint(0, 31)
+    getSpec = specialChar[randNum]
+    password = password + (getSpec)
+
+#digits
+randNum = random.randint(0, 9)
+getDig = digits[randNum]
+password = password + (getDig)
+
+
+#random.shuffle(password)
+
 
 
 print("Generated: "+password+"\n")
