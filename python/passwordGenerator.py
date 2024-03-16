@@ -6,9 +6,9 @@ import string
 #random.seed is needed to initialize the rand. num gen.
 
 #TODO:
-#strengthen randomness with shuffle, use methods, custom python classes, fix 25 length issue,
-#add constraitns of at least 1 special, 1 number and at least 8 characters long, error parsing,
-#try and catch
+#create README file for this project with TODO list and description of everything...
+#use methods, custom python classes, fix 25 length issue,
+#error parsing, try and catch
 
 random.seed()
 characters = list(string.ascii_letters)
