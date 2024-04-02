@@ -42,28 +42,28 @@ public class MenuMain {
                     System.out.println("\nThe volume of the cube is: "+volume+"^m3");
                     input = "";
                     break;
-                case "2":
+                case "2":{
                     System.out.print("File writer\n"+line2+"\n"+"To edit existing file or create new file, enter file name: ");
                     String seeking = scan.next();
                     File file = new File(fileFolder.concat(seeking));
                     try {
                         if(file.exists()){
                             FileWriter fileWriter = new FileWriter(file);
-                            System.out.print("Enter text to input:\n");
-                            String textToFile  = scan.next();
+                            System.out.println("Enter text to input:");
+                            String textToFile  = scan.nextLine();
                             System.out.println(textToFile);
                             fileWriter.write(textToFile);
                             fileWriter.close();
-
+                            System.out.println(file.getName()+"Text has been written and saved!");
                         }
                         else{
                             file.createNewFile();
                             FileWriter fileWriter = new FileWriter(file);
                             System.out.println(file.getName()+" has been created. Enter text to input:");
-                            String textToFile  = scan.next();
+                            String textToFile  = scan.nextLine();
                             fileWriter.write(textToFile);
                             fileWriter.close();
-
+                            System.out.println(file.getName()+"Text has been written and saved!");
                         }
                     } 
                     catch (Exception e) {
@@ -71,12 +71,38 @@ public class MenuMain {
                         e.printStackTrace();
                     }
                     break;
-                case "3":
-                    System.out.print("File Reader\n"+line2+"\n"+"Enter a number: ");
+                }
+                case "3":{
+                    System.out.print("File Reader\n"+line2+"\n"+"Enter an existing file: ");
+                    String seeking = scan.next();
+                    File file = new File(fileFolder.concat(seeking)); 
+                    try{
+                        Scanner reader = new Scanner(file);
+                        while (reader.hasNextLine()) {
+                            String data = reader.nextLine();
+                            System.out.println(data);
+                        }
+                        reader.close();
+                    }
+                    catch(FileNotFoundException e){
+                        System.out.println("File cannot be found");
+                    }
+                    
                     break;
-                case "4":
-                    System.out.print("Delete File\n"+line2+"\n"+"Enter a number: ");
+                }
+                case "4":{
+                    System.out.println("Delete File\n"+line2+"\n"+"Enter existing file to delete: ");
+                    String seeking = scan.next();
+                        File file = new File(fileFolder.concat(seeking));
+                        if(file.exists()){
+                            file.delete();
+                            System.out.println(seeking+" has been deleted.");
+                        }
+                        else
+                            System.out.println("No file of that name exists.");
+                        
                     break;
+                }
                 default:
                     System.out.println("invalid input. Try Again!");
             }//end of switch 
