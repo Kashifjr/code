@@ -1,7 +1,5 @@
 package Menu;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.io.*;
@@ -9,24 +7,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.*;
-import java.util.ArrayList;
-
 
 /*
  * TODO: EXCEPTION HANDLING!!
  */
 public class MenuMain {
-
-
     public static Set<String> listDirectory(String dir) throws IOException {
-    try (Stream<Path> stream = Files.list(Paths.get(dir))) {
-        return stream
-          .filter(file -> !Files.isDirectory(file))
-          .map(Path::getFileName)
-          .map(Path::toString)
-          .collect(Collectors.toSet());
+        try (Stream<Path> stream = Files.list(Paths.get(dir))) {
+            return stream
+            .filter(file -> !Files.isDirectory(file))
+            .map(Path::getFileName)
+            .map(Path::toString)
+            .collect(Collectors.toSet());
+        }
     }
-}
+
     public static void main(String[] args) throws IOException {
         String input = "";
         Scanner scan = new Scanner(System.in);
@@ -89,7 +84,7 @@ public class MenuMain {
                         e.printStackTrace();
                     }
                     break;
-                }
+                }//case2
                 case "3": {
                     System.out.print("File Reader\n" + line2 + "\n" + "Enter an existing file: ");
                     String seeking = scan.next();
@@ -106,7 +101,7 @@ public class MenuMain {
                     }
 
                     break;
-                }
+                }//case3
                 case "4": {
                     System.out.println("Delete File\n" + line2 + "\n" + "Enter existing file to delete: ");
                     String seeking = scan.next();
@@ -118,17 +113,43 @@ public class MenuMain {
                         System.out.println("No file of that name exists.");
 
                     break;
-                }
+                }//case4
 
                 case "5": {
-                    System.out.println("Show Files\n" + line2 + "\n" + "There are x files in the directory " + fileFolder);
-                   
-                    //listDirectory("/home/shika/code/java/Menu/files");
+                    Path dir =  Paths.get("/home/shika/code/java/Menu/files");
+                    int numOfFiles = dir.getNameCount();
+                    System.out.println("Show Files\n" + line2 + "\n" + "There are "+numOfFiles+" files in the directory " + fileFolder+":");
+                    try (Stream<Path> paths = Files.walk(dir)) {
+                        // print all files and folders
+                        paths.forEach(System.out::println);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    /*
+                     * Files imports .nio
+                     * using Files to try and read all of the .txt files in the 
+                     * /home/shika/code/java/Menu/files directory. 
+                     * 
+                     */
+                    Path test = Paths.get("/home/shika/code/java/Menu/files");
+                    Stream<Path> walker = Files.walk(test);
+                    System.out.println("Test1: "+test.getNameCount());
+                    walker.filter(Files::isRegularFile)
+                    .collect(Collectors.toList())
+                    .forEach(System.out::println);
+
+                    walker.toList();
+                    walker.close();
+
+
                     System.out.println(line2);
-                }
+                    }
+
+                }//case5
  
-            }// end of switch
+            }// end of switch        
+            scan.close();
         }
-        scan.close();
     }
-}
+//}
