@@ -1,5 +1,6 @@
 package Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
 import java.io.*;
@@ -51,10 +52,13 @@ public class MenuMain {
                 case "1":
                     cube cube = new cube();
                     System.out.print("Cube Calculator\n" + line2 + "\n" + "Enter a number: ");
-                    double side = scan.nextDouble();
-                    double volume = cube.cubeVolume(side);
-                    System.out.println("\nThe volume of the cube is: " + volume + "^m3");
-                    input = "";
+                    try {
+                        double side = scan.nextDouble();
+                        double volume = cube.cubeVolume(side);
+                        System.out.println("\nThe volume of the cube is: " + volume + "^m3");
+                    } catch (InputMismatchException e) {
+                        System.out.println("Value must be a Interger or Double value. Returning to menu...");
+                    }
                     break;
                 case "2": {
                     System.out.print("File writer\n" + line2 + "\n"
@@ -125,7 +129,6 @@ public class MenuMain {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-
                     /*
                      * Files imports .nio
                      * using Files to try and read all of the .txt files in the 
@@ -138,18 +141,12 @@ public class MenuMain {
                     walker.filter(Files::isRegularFile)
                     .collect(Collectors.toList())
                     .forEach(System.out::println);
-
                     walker.toList();
                     walker.close();
-
-
                     System.out.println(line2);
-                    }
-
-                }//case5
- 
+                } 
             }// end of switch        
             scan.close();
         }
     }
-//}
+}
