@@ -10,17 +10,23 @@ import string
 #use methods, custom python classes, fix 25 length issue,
 #error parsing, try and catch
 
+
+n = 50
+
 random.seed()
 characters = list(string.ascii_letters)
-random.shuffle(characters)
+for x in range(n):
+    random.shuffle(characters)
 
 random.seed()
 digits = list(string.digits)
-random.shuffle(digits)
+for x in range(n):
+    random.shuffle(digits)
 
 random.seed()
 specialChar = list(string.punctuation)
-random.shuffle(specialChar)
+for x in range(n):
+    random.shuffle(specialChar)
 
 password = ""
 
@@ -54,13 +60,13 @@ for x in range(length - numOfDigits - numOfSpec):
 
 #special characters 32 entries
 for x in range(numOfSpec):
-    randNum = random.randint(0, 31)
+    randNum = random.randint(0, len(specialChar))
     getSpec = specialChar[randNum]
     password = password + (getSpec)
 
 #digits 10 entries
 for x in range(numOfDigits):
-    randNum = random.randint(0, 9)
+    randNum = random.randint(0, len(digits) -1)
     getDig = digits[randNum]
     password = password + (getDig)
 
@@ -69,7 +75,6 @@ for x in range(numOfDigits):
 p = list(password)
 password = list(p)
 for x in range(25):
-    random.seed()
     random.shuffle(p)
 result = ''.join(p)
 
