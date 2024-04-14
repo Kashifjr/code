@@ -10,56 +10,46 @@ public class Window implements ActionListener {
     // CardLayout card = new CardLayout();
     GridLayout grid;
     // appPanel is a panel that contains the panel of "Cards"
-    private JPanel appPanel = new JPanel();
-
-    // Where instance variables are declared for cards:
-    // final static String BUTTONPANEL = "Card with JButtons";
-    // final static String TEXTPANEL = "Card with JTextField";
-
+    private JPanel appPanel;
     // Where the components controlled by the CardLayout are initialized:
     // Create the "cards".
-    JPanel Name = new JPanel();
-    JPanel Cars = new JPanel();
-    JPanel Cube = new JPanel();
 
-    /*
-     * TODO//
-     * Define and group all layouts with expaination comments
-     * 
-     */
     private void initWindow() {
         JFrame f = new JFrame();// creating instance of JFrame
 
+        // create cards
+        JPanel Name = new JPanel();
+        JPanel Cars = new JPanel();
+        JPanel Cube = new JPanel();
+        // set each card color
         Name.setBackground(Color.black);
         Cars.setBackground(Color.green);
         Cube.setBackground(Color.yellow);
+        // App panel created and Cards are added to App Panel
+        appPanel = new JPanel(new CardLayout());
+        appPanel.add(Name, "1");
+        appPanel.add(Cars, "2");
+        appPanel.add(Cube, "3");
 
-        // Cards are added to App Panel
-        appPanel.add("This is the Name option", Name);
-        appPanel.add("This is the car option", Cars);
-        appPanel.add("This is the cube option", Cube);
-
-        // creates Jpanel with the layout manager Spring Layout
+        // creates menu Jpanel with the layout manager Spring Layout
         SpringLayout spring = new SpringLayout();
         JPanel menuPanel = new JPanel(spring);
         menuPanel.setBackground(Color.red);// set color to red for debugging
 
-        // default app panel is BLUE
-        appPanel.setBackground(Color.blue);// set color to blue for debugging
-
         JButton button1 = new JButton("Name");// creating instance of JButton
-        button1.addActionListener(this);
-        menuPanel.add(button1);// adding button in JFrame
-        button1.setActionCommand("name");
-
         JButton button2 = new JButton("Cube Calc");// creating instance of JButton
-        button2.addActionListener(this);
-        menuPanel.add(button2);// adding button in JFrame
-        button2.setActionCommand("cube");
-
         JButton button3 = new JButton("Cars");// creating instance of JButton
+
+        button1.addActionListener(this);
+        button2.addActionListener(this);
         button3.addActionListener(this);
-        menuPanel.add(button3);// adding button in JFrame
+        // adding button in JFrame
+        menuPanel.add(button1);
+        menuPanel.add(button2);
+        menuPanel.add(button3);
+
+        button1.setActionCommand("name");
+        button2.setActionCommand("cube");
         button3.setActionCommand("cars");
 
         f.setTitle("Window1 Test");
@@ -69,7 +59,6 @@ public class Window implements ActionListener {
         spring.putConstraint(
                 SpringLayout.NORTH, button1, 50,
                 SpringLayout.SOUTH, button2);
-
         spring.putConstraint(
                 SpringLayout.NORTH, button2, 50,
                 SpringLayout.SOUTH, button3);
@@ -84,35 +73,26 @@ public class Window implements ActionListener {
         // adds panels to Jframe
         f.add(menuPanel);
         f.add(appPanel);
-        Cars.setVisible(false);
-        Name.setVisible(false);
-        Cube.setVisible(false);
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
+        CardLayout c1 = (CardLayout) (appPanel.getLayout());
         switch (e.getActionCommand()) {
             case "name":
-                Cars.setVisible(false);
-                Name.setVisible(true);
-                Cube.setVisible(false);
+                c1.show(appPanel, "1");
                 System.out.println("NAME OPTION PRESSED");
                 break;
             case "cars":
-                Cars.setVisible(true);
-                Name.setVisible(false);
-                Cube.setVisible(false);
+                c1.show(appPanel, "2");
                 System.out.println("CARS OPTION PRESSED");
+                break;
             case "cube":
-                Cars.setVisible(false);
-                Name.setVisible(false);
-                Cube.setVisible(true);
+                c1.show(appPanel, "3");
                 System.out.println("CUBE OPTION PRESSED");
                 break;
             default:
                 break;
         }
-
     }
 
     public static void main(String[] args) {
