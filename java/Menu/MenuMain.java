@@ -143,7 +143,7 @@ public class MenuMain {
                     walker.filter(Files::isRegularFile)
                             .collect(Collectors.toList())
                             .forEach(System.out::println);
-                    walker.toList();
+                    // walker.toList();
                     walker.close();
                     System.out.println(line2);
                 }
