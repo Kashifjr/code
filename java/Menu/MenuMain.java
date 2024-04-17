@@ -16,10 +16,10 @@ public class MenuMain {
     public static Set<String> listDirectory(String dir) throws IOException {
         try (Stream<Path> stream = Files.list(Paths.get(dir))) {
             return stream
-            .filter(file -> !Files.isDirectory(file))
-            .map(Path::getFileName)
-            .map(Path::toString)
-            .collect(Collectors.toSet());
+                    .filter(file -> !Files.isDirectory(file))
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .collect(Collectors.toSet());
         }
     }
 
@@ -36,9 +36,9 @@ public class MenuMain {
                 Delete Files...........4
                 Preview Files..........5
                     """;
-                
+
         while (!input.equals("q")) {
-            System.out.println(topLine+"\n"+options+"\n"+line2);
+            System.out.println(topLine + "\n" + options + "\n" + line2);
             input = scan.nextLine();
             /*
              * Volume of a cube is v=s^3. The length, width and height are all
@@ -48,6 +48,7 @@ public class MenuMain {
             switch (input) {
                 case "q":
                     System.out.println(line2 + "\nThanks for using the Program!\n" + topLine);
+                    scan.close();
                     break;
                 case "1":
                     cube cube = new cube();
@@ -88,7 +89,7 @@ public class MenuMain {
                         e.printStackTrace();
                     }
                     break;
-                }//case2
+                } // case2
                 case "3": {
                     System.out.print("File Reader\n" + line2 + "\n" + "Enter an existing file: ");
                     String seeking = scan.next();
@@ -105,7 +106,7 @@ public class MenuMain {
                     }
 
                     break;
-                }//case3
+                } // case3
                 case "4": {
                     System.out.println("Delete File\n" + line2 + "\n" + "Enter existing file to delete: ");
                     String seeking = scan.next();
@@ -117,12 +118,13 @@ public class MenuMain {
                         System.out.println("No file of that name exists.");
 
                     break;
-                }//case4
+                } // case4
 
                 case "5": {
-                    Path dir =  Paths.get("/home/shika/code/java/Menu/files");
+                    Path dir = Paths.get("/home/shika/code/java/Menu/files");
                     int numOfFiles = dir.getNameCount();
-                    System.out.println("Show Files\n" + line2 + "\n" + "There are "+numOfFiles+" files in the directory " + fileFolder+":");
+                    System.out.println("Show Files\n" + line2 + "\n" + "There are " + numOfFiles
+                            + " files in the directory " + fileFolder + ":");
                     try (Stream<Path> paths = Files.walk(dir)) {
                         // print all files and folders
                         paths.forEach(System.out::println);
@@ -131,22 +133,21 @@ public class MenuMain {
                     }
                     /*
                      * Files imports .nio
-                     * using Files to try and read all of the .txt files in the 
-                     * /home/shika/code/java/Menu/files directory. 
+                     * using Files to try and read all of the .txt files in the
+                     * /home/shika/code/java/Menu/files directory.
                      * 
                      */
                     Path test = Paths.get("/home/shika/code/java/Menu/files");
                     Stream<Path> walker = Files.walk(test);
-                    System.out.println("Test1: "+test.getNameCount());
+                    System.out.println("Test1: " + test.getNameCount());
                     walker.filter(Files::isRegularFile)
-                    .collect(Collectors.toList())
-                    .forEach(System.out::println);
+                            .collect(Collectors.toList())
+                            .forEach(System.out::println);
                     walker.toList();
                     walker.close();
                     System.out.println(line2);
-                } 
-            }// end of switch        
-            scan.close();
+                }
+            }// end of switch
         }
     }
 }
