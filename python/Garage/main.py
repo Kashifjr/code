@@ -1,14 +1,14 @@
 from Car import Car
 
-# garage path: /home/shika/code/python/Garage/garages
+# garage folder path: /home/shika/code/python/Garage/garages
 
 userInput = "" 
 fileName = "empty"# current garage file
 filePath = "/home/shika/code/python/Garage/garages/"
 currentGarage = []# local instance of garage
 
-testCar = Car(1970, "Chevy", "Chevelle")
-currentGarage.append(testCar)
+#testCar = Car(1970, "Chevy", "Chevelle")
+#currentGarage.append(testCar)# test adding car to garage.
 
 # creates menu with options text 
 def genMenu():
@@ -30,6 +30,7 @@ def carParse(read):
     car = Car(car[0], car[1], car[2])
     return car
 
+# save current garage to current .txt file
 def saveGarage():
     if fileName == "empty":
         return
@@ -42,12 +43,15 @@ def saveGarage():
     print("Garage "+fileName+" has been saved!")
 
 #TODO: try/catch type for model and car, set bounds for cars to not
-# exceed current year, other custom exceptions, create fileHandler .py files to 
-# clean up code and hanle all file funcions oustide of this main file.
+# exceed current year(maybe), other custom exceptions, *create fileHandler .py files to 
+# clean up code and handle all file funcions oustide of this main file?
+# perhaps better to create file handler/load/save methods only, not new .py file
+# to handle files?
+# add option to remove garage files and view all garage files in directory
 
 while True:
     genMenu()
-    userInput = input("Choose and option: ")
+    userInput = input("Choose an option: ")
     print()# new line for space
     if userInput == "1":# add car
         carInput = input("Enter year, make and model of new car: ")
@@ -65,12 +69,27 @@ while True:
         print(car," has been created!\n")
 
     elif userInput == "2":# remove car
-         pass
-    
+        c = 1
+        for x in currentGarage:
+            print(str(c)+"......",x)
+            c+=1
+            print()
+        try:
+            carID = int(input("enter car index to delete: "))
+            carID += -1
+            if carID >= len(currentGarage) or carID < 0:
+                print("car ID is out of bounds")
+            else:
+                print(currentGarage[carID],"has been removed!")
+                currentGarage.pop(carID)
+            print()
+        except ValueError as e:
+            print("Only integers are accepted!")
+  
     elif userInput == "3":# view garage
         c = 1 #counts how many cars in garage
         if len(currentGarage) == 0:
-            print("The current garage is empty!")
+            print("The current garage is empty!\n")
         else:
             for x in currentGarage:
                 print(str(c)+"......",x)
@@ -83,7 +102,8 @@ while True:
             newFile = newFile + ".txt"
         nF = filePath + newFile 
         f = open(nF, "x")
-        print(str(newFile)+" garage has been created!")
+        print(str(newFile)+" garage has been created!\n")
+        fileName = newFile
 
     elif userInput == "5":# load garage
         fileInput = input("enter garage file name: ")
@@ -94,7 +114,6 @@ while True:
         # load method
 
         file = filePath + fileInput
-        #print(file)
         try:
             f = open(file, "r")
             currentGarage.clear()
@@ -105,10 +124,12 @@ while True:
             fileName = fileInput      
         except FileNotFoundError as e:
             print(fileInput+" does not exist.")
-    # need to create a method to call that writes currentGarage
-    # array to currently open file
+
     elif userInput == "6":# save garage
-        saveGarage()
+        if fileName == "empty":
+            print("There is no open Garage file to save to!\n")
+        else:
+            saveGarage()
 
     elif userInput == "q" or userInput == "quit":# break progam
         print("closing program...")
