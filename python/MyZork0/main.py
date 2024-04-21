@@ -18,13 +18,18 @@ from Room import Room
 # collectables and health*. 
 #
 # should make Room class? or contiue as is?
-
+# check inventory at any moment? current implementations calls
+# redoing much of the "directions" implemention each func. has as
+# an attribute..
 
 
 inventory = []# global player inventory
 
 def noWhere():# nowhre to go func.
     print("There is no where to go or nothing to do.")
+
+def showInventory():
+    print(inventory)
 
 def introScene():# title card
     print("""
@@ -61,6 +66,12 @@ small stack of papers on a shelf
 above your head.""")
     while True:
         userInput = input("Type an action: ")
+        if "papers" in userInput and "sword" not in inventory:
+            print("""Your curiousity has led you to find a switch hidden behind
+the papers! A small trap door reveals a magic sword you can now
+use to defend yourself!""")
+            inventory.append("sword")# the sword has been found and added to inventory!
+            continue
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
@@ -142,7 +153,12 @@ def roomB2(directions):
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomB1(directions)
+            if "BossKey" in inventory:
+                roomB1(directions)
+            else: 
+                print("""You have found the boos room! But you don't 
+possess the key to enter! You must continue searching
+in order to escape!""")
         elif userInput == "right":
             noWhere()
         elif userInput == "back":
@@ -195,8 +211,6 @@ def roomC2(directions):
             roomB2(directions)
         elif userInput == "forward":
             noWhere()
-
-    
 
 # main function
 def main():
