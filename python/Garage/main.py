@@ -101,9 +101,12 @@ while True:
         if ".txt" not in newFile:
             newFile = newFile + ".txt"
         nF = filePath + newFile 
-        f = open(nF, "x")
-        print(str(newFile)+" garage has been created!\n")
-        fileName = newFile
+        try:
+            f = open(nF, "x")
+            print(str(newFile)+" garage has been created!\n")
+            fileName = newFile
+        except FileExistsError as err:
+            print(fileName+" already exists!\n")
 
     elif userInput == "5":# load garage
         fileInput = input("enter garage file name: ")

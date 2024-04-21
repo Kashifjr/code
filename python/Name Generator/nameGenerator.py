@@ -36,7 +36,7 @@ ranNum0 = random.randint(0,fNameLen)
 random.seed()
 ranNum1 = random.randint(0,lNameLen)
 
-print(str(ranNum0) +" "+ str(ranNum1))
+#print(str(ranNum0) +" "+ str(ranNum1))
 
 for x in range(n): #shuffle arrays n times
     random.shuffle(firstNames)
