@@ -24,11 +24,22 @@ Load Garage.......5
 Save Garage.......6
 """+line2)
 
-
+# parses string to create and return a Car object
 def carParse(read):
     car = read.split()
     car = Car(car[0], car[1], car[2])
     return car
+
+def saveGarage():
+    if fileName == "empty":
+        return
+    print("saving current garage...")
+    file = filePath + fileName
+    f = open(file, "w")
+    for x in currentGarage:
+        f.write(str(x)+"\n")
+    f.close()
+    print("Garage "+fileName+" has been saved!")
 
 #TODO: try/catch type for model and car, set bounds for cars to not
 # exceed current year, other custom exceptions, create fileHandler .py files to 
@@ -50,7 +61,8 @@ while True:
             print(str(e) +" is not an integer!")
         
         car = Car(carInput[0], carInput[1].capitalize(), carInput[2].capitalize())
-        #print(car," has been created!\n")
+        currentGarage.append(car)
+        print(car," has been created!\n")
 
     elif userInput == "2":# remove car
          pass
@@ -65,6 +77,14 @@ while True:
                 c+=1
             print()
 
+    elif userInput == "4":# new garage
+        newFile = input("Enter garage name: ")
+        if ".txt" not in newFile:
+            newFile = newFile + ".txt"
+        nF = filePath + newFile 
+        f = open(nF, "x")
+        print(str(newFile)+" garage has been created!")
+
     elif userInput == "5":# load garage
         fileInput = input("enter garage file name: ")
         if ".txt" not in fileInput:
@@ -74,18 +94,23 @@ while True:
         # load method
 
         file = filePath + fileInput
-        print(file)
-        f = open(file, "r")
-
-        #print(f.readlines())
-        currentGarage.clear()
-        for x in f:
-            tempCar = carParse(x)
-            currentGarage.append(tempCar)
-
-        f.close()
-        fileName = fileInput
+        #print(file)
+        try:
+            f = open(file, "r")
+            currentGarage.clear()
+            for x in f:
+                tempCar = carParse(x)
+                currentGarage.append(tempCar)
+            f.close()
+            fileName = fileInput      
+        except FileNotFoundError as e:
+            print(fileInput+" does not exist.")
+    # need to create a method to call that writes currentGarage
+    # array to currently open file
+    elif userInput == "6":# save garage
+        saveGarage()
 
     elif userInput == "q" or userInput == "quit":# break progam
         print("closing program...")
+        saveGarage()            
         break
