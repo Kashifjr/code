@@ -55,7 +55,8 @@ def dungeonCell(directions):
 
 # hidden sword when performing action at south
 def roomA0(directions):
-    print("""tiny supply closet with a metal bucket and
+    print("""roomA0
+tiny supply closet with a metal bucket and
 small stack of papers on a shelf 
 above your head.""")
     while True:
@@ -72,7 +73,7 @@ above your head.""")
             noWhere()
 
 def roomA1(directions):
-    print("Small corridor ouside of cell.")
+    print("roomA1")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
@@ -80,14 +81,14 @@ def roomA1(directions):
         elif userInput == "left":
             roomA0(directions)
         elif userInput == "right":
-            noWhere()
+            roomA2(directions)
         elif userInput == "back":
             dungeonCell(directions)
         elif userInput == "forward":
             noWhere()
 
 def roomA2(directions):
-    print("Small corridor ouside of cell.")
+    print("roomA2")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
@@ -103,95 +104,95 @@ def roomA2(directions):
 
 # final boss key located in this room.
 def roomB0(directions):
-    print("Small corridor ouside of cell.")
+    print("roomB0")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA0(directions)
+            noWhere()
         elif userInput == "right":
             noWhere()
         elif userInput == "back":
-            dungeonCell(directions)
+            noWhere()
         elif userInput == "forward":
-            noWhere()
+            roomC0(directions)
 
-# final boss and escape room.
+# final boss and escape room.roomA0
 def roomB1(directions):
-    print("Small corridor ouside of cell.")
+    print("roomB1")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA0(directions)
-        elif userInput == "right":
             noWhere()
+        elif userInput == "right":
+            roomB2(directions)
         elif userInput == "back":
-            dungeonCell(directions)
+            noWhere()
         elif userInput == "forward":
             noWhere()
 
 # player must have weapon to defeat enemy.
 def roomB2(directions):
-    print("Small corridor ouside of cell.")
+    print("roomB2")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA0(directions)
+            roomB1(directions)
         elif userInput == "right":
             noWhere()
         elif userInput == "back":
-            dungeonCell(directions)
+            roomA2(directions)
         elif userInput == "forward":
-            noWhere()
+            roomC2(directions)
 
 # player must have enemy AND plus 1 health to defeat enemy
 def roomC0(directions):
-    print("Small corridor ouside of cell.")
+    print("roomC0")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA0(directions)
-        elif userInput == "right":
             noWhere()
+        elif userInput == "right":
+            roomC1(directions)
         elif userInput == "back":
-            dungeonCell(directions)
+            roomB0(directions)
         elif userInput == "forward":
             noWhere()
 
 def roomC1(directions):
-    print("Small corridor ouside of cell.")
+    print("roomC1")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA0(directions)
+            roomC0(directions)
         elif userInput == "right":
-            noWhere()
+            roomC2(directions)
         elif userInput == "back":
-            dungeonCell(directions)
+            noWhere()
         elif userInput == "forward":
             noWhere()
 
 def roomC2(directions):
-    print("Small corridor ouside of cell.")
+    print("roomC2")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA0(directions)
+            roomC1(directions)
         elif userInput == "right":
             noWhere()
         elif userInput == "back":
-            dungeonCell(directions)
+            roomB2(directions)
         elif userInput == "forward":
             noWhere()
 
