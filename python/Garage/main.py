@@ -101,12 +101,14 @@ while True:
 
     elif userInput == "4":# new garage
         newFile = input("Enter garage name: ")
-        if ".txt" not in newFile:
-            newFile = newFile + ".txt"
-        elif len(newFile) < 1:
+        if len(newFile) < 1:
             print("Current input is empty. Returning to menu...")
-        nF = filePath + newFile 
+            continue
+        elif ".txt" not in newFile:
+            newFile = newFile + ".txt"
+            
         try:
+            nF = filePath + newFile 
             f = open(nF, "x")
             print(str(newFile)+" garage has been created!\n")
             fileName = newFile
