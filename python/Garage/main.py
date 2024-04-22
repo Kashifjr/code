@@ -1,4 +1,5 @@
 from Car import Car
+import os
 
 # garage folder path: /home/shika/code/python/Garage/garages
 
@@ -53,6 +54,8 @@ while True:
     genMenu()
     userInput = input("Choose an option: ")
     print()# new line for space
+    #os.system('cls||clear')# clears terminal
+    
     if userInput == "1":# add car
         carInput = input("Enter year, make and model of new car: ")
         carInput = carInput.split() #converts string into an array
@@ -100,6 +103,8 @@ while True:
         newFile = input("Enter garage name: ")
         if ".txt" not in newFile:
             newFile = newFile + ".txt"
+        elif len(newFile) < 1:
+            print("Current input is empty. Returning to menu...")
         nF = filePath + newFile 
         try:
             f = open(nF, "x")
@@ -135,6 +140,7 @@ while True:
             saveGarage()
 
     elif userInput == "q" or userInput == "quit":# break progam
+        os.system('cls||clear')
         print("closing program...")
         saveGarage()            
         break
