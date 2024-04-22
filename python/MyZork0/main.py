@@ -118,7 +118,7 @@ use to defend yourself!""")
         elif userInput == "left":
             noWhere()
         elif userInput == "right":
-            roomA1(directions)
+            return roomA1(directions)
         elif userInput == "back":
             noWhere()
         elif userInput == "forward":
@@ -137,11 +137,11 @@ def roomA1(directions):
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA0(directions)
+            return roomA0(directions)
         elif userInput == "right":
-            roomA2(directions)
+            return roomA2(directions)
         elif userInput == "back":
-            dungeonCell(directions)
+            return dungeonCell(directions)
         elif userInput == "forward":
             noWhere()
 
@@ -158,13 +158,13 @@ def roomA2(directions):
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomA1(directions)
+            return roomA1(directions)
         elif userInput == "right":
             noWhere()
         elif userInput == "back":
             noWhere()
         elif userInput == "forward":
-            roomB2(directions)
+            return roomB2(directions)
 
 # final boss key located in this room.
 def roomB0(directions):
@@ -196,7 +196,7 @@ the pages! You now have the Boss Room key!""")
         elif userInput == "back":
             noWhere()
         elif userInput == "forward":
-            roomC0(directions)
+            return roomC0(directions)
 
 # final boss and escape room.roomA0
 def roomB1(directions):
@@ -227,7 +227,7 @@ reclaiming your freedom!\nYou Win!!!""")
         elif userInput == "left":
             noWhere()
         elif userInput == "right":
-            roomB2(directions)
+            return roomB2(directions)
         elif userInput == "back":
             noWhere()
         elif userInput == "forward":
@@ -267,9 +267,9 @@ did a number on this one...""")
             elif userInput == "right":
                 noWhere()
             elif userInput == "back":
-                roomA2(directions)
+                return roomA2(directions)
             elif userInput == "forward":
-                roomC2(directions)
+                return roomC2(directions)
 
 # player must have enemy AND plus 1 health to defeat enemy
 def roomC0(directions):
@@ -300,9 +300,9 @@ def roomC1(directions):
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            roomC0(directions)
+            return roomC0(directions)
         elif userInput == "right":
-            roomC2(directions)
+            return roomC2(directions)
         elif userInput == "back":
             noWhere()
         elif userInput == "forward":
