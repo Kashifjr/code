@@ -17,12 +17,15 @@ def genMenu():
     line1 = "------------------------"
     line2 = "========================"
     print(menuLine+"\nCurrent Garage: "+fileName+"\n"+line1+"""
-Add car...........1
+Add Car...........1
 Remove Car........2
 View Garage.......3
 New Garage........4
 Load Garage.......5
 Save Garage.......6
+View all Garages..7
+Remove Garage.....8                    
+Close Program....'q'
 """+line2)
 
 # parses string to create and return a Car object
@@ -60,35 +63,42 @@ while True:
         carInput = input("Enter year, make and model of new car: ")
         carInput = carInput.split() #converts string into an array
         if len(carInput) < 3 or len(carInput) > 3:
-            print("input is too short or too long, try again!")
-            break # make custom exception to throw
-        try:
-            int(carInput[0])
-        except ValueError as e:
-            print(str(e) +" is not an integer!")
+            print("input is too short or too long! Returning to menu...\n")
+            #break # make custom exception to throw
+        else:
+            try:
+                int(carInput[0])
+                car = Car(carInput[0], carInput[1].capitalize(), carInput[2].capitalize())
+                currentGarage.append(car)
+                print(car," has been created!\n")
+            except ValueError as e:
+                print(str(e) +" is not an integer!")
         
-        car = Car(carInput[0], carInput[1].capitalize(), carInput[2].capitalize())
-        currentGarage.append(car)
-        print(car," has been created!\n")
-
     elif userInput == "2":# remove car
         c = 1
-        for x in currentGarage:
-            print(str(c)+"......",x)
-            c+=1
-            print()
-        try:
-            carID = int(input("enter car index to delete: "))
-            carID += -1
-            if carID >= len(currentGarage) or carID < 0:
-                print("car ID is out of bounds")
-            else:
-                print(currentGarage[carID],"has been removed!")
-                currentGarage.pop(carID)
-            print()
-        except ValueError as e:
-            print("Only integers are accepted!")
-  
+        if len(currentGarage) > 0:
+            for x in currentGarage:
+                print(str(c)+"......",x)
+                c+=1
+                print()
+            try:
+                carID = int(input("enter car index to delete: "))
+                carID += -1
+                if carID >= len(currentGarage) or carID < 0:
+                    print("car ID is out of bounds")
+                else:
+                    print(currentGarage[carID],"has been removed!")
+                    currentGarage.pop(carID)
+                print()
+            except ValueError as e:
+                print("Only integers are accepted!")
+
+        elif fileName == "empty":
+            print("A garage has not been loaded!\n")
+            
+        elif len(currentGarage) == 0:
+            print("There are no cars in the current garage!\n")
+      
     elif userInput == "3":# view garage
         c = 1 #counts how many cars in garage
         if len(currentGarage) == 0:
@@ -141,8 +151,33 @@ while True:
         else:
             saveGarage()
 
+    elif userInput == "7":# view all garages
+        print("Garage Path Directory: "+filePath+"\n")
+        for x in os.listdir(filePath):
+            print(x)
+        print()
+
+    elif userInput == "8":# remove garage
+        fileInput = input("enter garage file name: ")
+        if ".txt" not in fileInput:
+            fileInput = fileInput + ".txt"
+
+        # HERE, call the custom fileHandler and pass the file name with
+        # load method
+
+        file = filePath + fileInput
+        try:
+            os.remove(file)
+            print(fileInput+" has been deleted.\n")
+               
+        except FileNotFoundError as e:
+            print(fileInput+" does not exist.\n")
+
     elif userInput == "q" or userInput == "quit":# break progam
         os.system('cls||clear')
         print("closing program...")
         saveGarage()            
         break
+
+    else:
+        print("\""+userInput+"\""+" is an invalid or unrecgonized input.\nTry again!\n")
