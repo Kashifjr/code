@@ -9,8 +9,8 @@ from Room import Room
 #           |
 #         cell
 # ---------------------
-# Play: the player must find the key AND weapon to defeat the 
-# main boss and escape the dungeon. monsters can only be defeated
+# Play: the player must find the key, a weapon and Amor to defeat
+# the main boss and escape the dungeon. monsters can only be defeated
 # if player has enough health and has the weapon. ** monsters
 # have a chance to be asleep and player can insta kill or sneak
 # past without having to kill them. some rooms have secret rooms*
@@ -21,6 +21,9 @@ from Room import Room
 # check inventory at any moment? current implementations calls
 # redoing much of the "directions" implemention each func. has as
 # an attribute..
+# is there a way to return a functino with a function? i desire to 
+# always return to the main func to immediately go to the room
+# func that the previous one returned...
 
 inventory = []# global player inventory
 cell_Locked = True
