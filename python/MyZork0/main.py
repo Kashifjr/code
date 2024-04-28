@@ -2,8 +2,8 @@ from Room import Room
 
 # ----ROOMS LAYOUT-----
 #   C0   -  C1   -  C2
-#   |               |
-#   B0      B1   -  B2
+#                   |
+#           B1   -  B2
 #                   |
 #   A0   -  A1   -  A2
 #           |
@@ -25,10 +25,10 @@ from Room import Room
 # always return to the main func to immediately go to the room
 # func that the previous one returned...
 
-inventory = []# global player inventory
+inventory = []# player inventory
 cell_Locked = True
 
-def noWhere():# nowhre to go func.
+def nothing():# nowhre to go func.
     print("There is no where to go or nothing to do.")
 
 def showInventory():
@@ -53,11 +53,12 @@ room...
 =============================================
 """)
 
+# start of game room.
 def dungeonCell(directions):
     print("""Filthy cell you are held captive in. A dirty 
 mattress is on the floor,a bucket filled with something 
 horrendous and smells the same. The bars to yourcell are 
-strong and impassable.""")
+strong and impassable.\n""")
     cell_Locked = True
     if "nail" in inventory:
         cell_Locked = False
@@ -71,30 +72,30 @@ strong and impassable.""")
         if cell_Locked == True:
             if (userInput == "forward" or "door" in userInput) and "nail" not in inventory:
                print("""You cannot get passed the locked cell door. But it seems you may be
-able to unlock the cell if you can find something small enought to jiggle the keyhole with...""")
+able to unlock the cell if you can find something small enought to jiggle the keyhole with...\n""")
             elif userInput == "forward" or "door" in userInput and "nail" in inventory:
                 print("""You play the nail around in the cell keyhole until you hear a loud *clank*.
-Cell door swings open and you can now explore the dungeon!""")
+Cell door swings open and you can now explore the dungeon!\n""")
                 cell_Locked = False
                 return roomA1(directions)
             elif "bucket" in userInput and "nail" not in inventory:
                 print("""Defying every fiber in your being, you pludge your hand int the bucket. Fishing
-around in the cold muck, you find a long rusty nail.""")
+around in the cold muck, you find a long rusty nail.\n""")
                 inventory.append("nail")
 
         elif cell_Locked == False:
             if userInput not in directions:
                 print("invalid action, try again!")
             elif userInput == "left":
-                noWhere()
+                nothing()
             elif userInput == "right":
-                noWhere()
+                nothing()
             elif userInput == "back":
-                noWhere()
+                nothing()
             elif userInput == "forward":
                 return roomA1(directions)
 
-# hidden sword when performing action at south
+# hidden sword when mentioning anything about the papers
 def roomA0(directions):
     
     print("""roomA0
@@ -102,7 +103,7 @@ tiny supply closet with a metal bucket and
 small stack of papers on a shelf 
 above your head.""")
     while True:
-        userInput = input("Type an action: ")
+        userInput = input("Type an action: \n")
         if userInput == "inventory":
             showInventory()
         elif userInput == "q" or userInput == "quit":
@@ -111,31 +112,31 @@ above your head.""")
         if "papers" in userInput and "sword" not in inventory:
             print("""Your curiousity has led you to find a switch hidden behind
 the papers! A small trap door reveals a magic sword you can now
-use to defend yourself!""")
+use to defend yourself!\n""")
             inventory.append("sword")# the sword has been found and added to inventory!
             continue
         elif "papers" in userInput and "sword" in inventory:
-            print("""There is nothing else notable about the stack of papers.""")
+            print("""There is nothing else notable about the stack of papers.\n""")
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            noWhere()
+            nothing()
         elif userInput == "right":
             return roomA1(directions)
         elif userInput == "back":
-            noWhere()
+            nothing()
         elif userInput == "forward":
-            noWhere()
+            nothing()
 
 def roomA1(directions):
-    print("roomA1")
+    print("""A small corridor. There is a small closet to your LEFT and 
+a door to your RIGHT.\n""")
     while True:
         userInput = input("Type an action: ")
-
         if userInput == "inventory":
             showInventory()
         elif userInput == "q" or userInput == "quit":
-            return
+            quit()
 
         if userInput not in directions:
             print("invalid action, try again!")
@@ -146,10 +147,10 @@ def roomA1(directions):
         elif userInput == "back":
             return dungeonCell(directions)
         elif userInput == "forward":
-            noWhere()
+            nothing()
 
 def roomA2(directions):
-    print("roomA2")
+    print("""A small corridor connecting two rooms.\n""")
     while True:
         userInput = input("Type an action: ")
 
@@ -163,19 +164,87 @@ def roomA2(directions):
         elif userInput == "left":
             return roomA1(directions)
         elif userInput == "right":
-            noWhere()
+            nothing()
         elif userInput == "back":
-            noWhere()
+            nothing()
         elif userInput == "forward":
             return roomB2(directions)
 
+# final boss and escape room.
+def roomB1(directions):
+    print("roomB1")
+    if "armor" not in inventory:
+        print("""You've made it to the boss room! There is a great foe that towers over
+you with blood lust in its eyes! You try your best to defeat the monster but you can't
+withstand the single blow it manages to deal to you. Your fragile body explodes with 
+the emense force and your great escape ends rather brutally. Game Over...\n""")
+        quit()
+    elif "armor" in inventory:
+        print("""You've made it to the boss room! There is a great foe that towers over
+you with blood lust in its eyes! Your battle is fierce and long but with the masterly 
+forged sword and beautifully crafted set of armor, you are able to trade blows with the
+beast until you land the final and fatal strike! The beast has been defeated!""")
+        print("""You pass the corpse of the beast and make your way to the ouside world,
+reclaiming your freedom!\nYou Win!!!""")
+        quit()# close prpgram...
+    
+# player must have weapon to defeat enemy.
+def roomB2(directions):
+    print("roomB2")
+    monster_Dead = False
+    if "monster1" in inventory:
+        monster_Dead = True
+
+    while True:
+        if monster_Dead == False:
+            print("""There is a muscular monster that stands before you. You may have
+a chance to flee if you think fast or you can take you chances and challenge the beast.\n""")
+            userInput = input("Fight or flee?: ")
+            if userInput == "fight":
+                if "sword" in inventory:
+                    print("""With sword in hand, you and the monster duke it out breifly. The monster
+    is very powerful but slow. You manage to slip the cold steel between its ribs with
+    quick joust! The beast falls as all life escapse its body.\n""")
+                    monster_Dead = True
+                    # banndaid to add monster to inventory to make sure it is still dead when reloading room
+                    inventory.append("monster1")
+                else:
+                    print("""You have faith in your two fists and try to vanquish the monster. 
+The monster let's out a demeaning grunt and promptly squashes your delicate human body
+into a bloody mush of gore and bone.\nYou Died. Game Over.\n""")
+                    quit()
+
+            elif userInput == "flee":
+                roomA2(directions)
+            
+
+        elif monster_Dead == True:
+            print("""The mangled corpse of the monster lies on the floor. You really did 
+did a number on this one...\n""")
+            userInput = input("Type an action: ")
+            if userInput not in directions:
+                print("invalid action, try again!")
+            elif userInput == "left":
+                if "key" in inventory:
+                    roomB1(directions)
+                else: 
+                    print("""You have found the boos room! But you don't 
+    possess the key to enter! You must continue searching
+    in order to escape!\n""")
+            elif userInput == "right":
+                nothing()
+            elif userInput == "back":
+                return roomA2(directions)
+            elif userInput == "forward":
+                return roomC2(directions)
+
 # final boss key located in this room.
-def roomB0(directions):
-    print("roomB0")
+def roomC0(directions):
+    print("roomC0")
     print("""This is a very large room. There is a desk with various papers. The right 
 wall has a shelf that has a few ruined books. One of them looks odd. There is a chest
 at the left side of the room. In front of you, there is the door you entered. The back
-of the room has a small bed with no pillow or blankets.""")
+of the room has a small bed with no pillow or blankets.\n""")
     while True:
         userInput = input("Type an action: ")
 
@@ -187,132 +256,48 @@ of the room has a small bed with no pillow or blankets.""")
         if "book" in userInput or "shelf" in userInput and "key" not in inventory:
             print("""Looking at the books more closely, you find that the most of them are
 badly burned and usless. But the last one is in good condition and has a key hidden between
-the pages! You now have the Boss Room key!""")
+the pages! You now have the Boss Room key!\n""")
             inventory.append("key")
         
         if userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
-            noWhere()
+            nothing()
         elif userInput == "right":
-            noWhere()
+            return roomC1(directions)
         elif userInput == "back":
-            noWhere()
+            nothing()
         elif userInput == "forward":
-            return roomC0(directions)
+            nothing()
 
-# final boss and escape room.roomA0
-def roomB1(directions):
-    print("roomB1")
-    if "armor" not in inventory:
-        print("""You've made it to the boss room! There is a great foe that towers over
-you with blood lust in its eyes! You try your best to defeat the monster but you can't
-withstand the single blow it manages to deal to you. Your fragile body explodes with 
-the emense force and your great escape ends rather brutally. Game Over...""")
-    elif "armor" in inventory:
-        print("""You've made it to the boss room! There is a great foe that towers over
-you with blood lust in its eyes! Your battle is fierce and long but with the masterly 
-forged sword and beautifully crafted set of armor, you are able to trade blows with the
-beast until you land the final and fatal strike! The beast has been defeated!""")
-        print("""You pass the corpse of the beast and make your way to the ouside world,
-reclaiming your freedom!\nYou Win!!!""")
-        return
-    while True:
-        userInput = input("Type an action: ")
-
-        if userInput == "inventory":
-            showInventory()
-        elif userInput == "q" or userInput == "quit":
-            return
-
-        if userInput not in directions:
-            print("invalid action, try again!")
-        elif userInput == "left":
-            noWhere()
-        elif userInput == "right":
-            return roomB2(directions)
-        elif userInput == "back":
-            noWhere()
-        elif userInput == "forward":
-            noWhere()
-
-# player must have weapon to defeat enemy.
-def roomB2(directions):
-    print("roomB2")
-    monster_Dead = False
-
-    while True:
-        if monster_Dead == False:
-            print("""There is a muscular monster that stands before you. You may have
-a chance to flee if you think fast or you can take you chances and challenge the beast.""")
-            userInput = input("Fight or flee?: ")
-            if userInput == "fight" and "sword" in inventory:
-                print("""With sword in hand, you and the monster duke it out breifly. The monster
-is very powerful but slow. You manage to slip the cold steel between its ribs with
-quick joust! The beast falls as all life escapse its body.""")
-                monster_Dead = True
-            elif userInput == "flee":
-                roomA2(directions)
-
-        elif monster_Dead == True:
-            print("""The mangled corpse of the monster lies on the floor. You really did 
-did a number on this one...""")
-            userInput = input("Type an action: ")
-            if userInput not in directions:
-                print("invalid action, try again!")
-            elif userInput == "left":
-                if "key" in inventory:
-                    roomB1(directions)
-                else: 
-                    print("""You have found the boos room! But you don't 
-    possess the key to enter! You must continue searching
-    in order to escape!""")
-            elif userInput == "right":
-                noWhere()
-            elif userInput == "back":
-                return roomA2(directions)
-            elif userInput == "forward":
-                return roomC2(directions)
-
-# player must have enemy AND plus 1 health to defeat enemy
-def roomC0(directions):
-    print("roomC0")
-    while True:
-        userInput = input("Type an action: ")
-
-        if userInput == "inventory":
-            showInventory()
-        elif userInput == "q" or userInput == "quit":
-            return
-
-        if userInput not in directions:
-            print("invalid action, try again!")
-        elif userInput == "left":
-            noWhere()
-        elif userInput == "right":
-            roomC1(directions)
-        elif userInput == "back":
-            roomB0(directions)
-        elif userInput == "forward":
-            noWhere()
-
+# armor is located in ths room.
 def roomC1(directions):
     print("roomC1")
+    print("""This room doen't seem to have much of importance in here. There is
+a large rug in the middle of room, and along both sides of the walls,
+there are armor stands but none of them are showcasing any armor.\n""")
     while True:
         userInput = input("Type an action: ")
-        if userInput not in directions:
+        if "rug" in userInput and "amror" not in inventory:
+            print("""The rug is large and heavy. But you find that there is a hidden
+door underneath it! You upen the dusty door and find a crumpled set of rusty armor!
+This will hopefully allow you to defeat stronger enemies!\n""")
+            inventory.append("armor")
+
+        elif userInput not in directions:
             print("invalid action, try again!")
         elif userInput == "left":
             return roomC0(directions)
         elif userInput == "right":
             return roomC2(directions)
         elif userInput == "back":
-            noWhere()
+            nothing()
         elif userInput == "forward":
-            noWhere()
+            nothing()
 
 def roomC2(directions):
-    print("roomC2")
+    print("""A small corridor connecting a room to your LEFT and a
+room BEHIND you.\n""")
     while True:
         userInput = input("Type an action: ")
         if userInput not in directions:
@@ -320,11 +305,11 @@ def roomC2(directions):
         elif userInput == "left":
             roomC1(directions)
         elif userInput == "right":
-            noWhere()
+            nothing()
         elif userInput == "back":
             roomB2(directions)
         elif userInput == "forward":
-            noWhere()
+            nothing()
 
 # main function
 def main():
