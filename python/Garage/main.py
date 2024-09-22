@@ -25,7 +25,7 @@ Load Garage.......5
 Save Garage.......6
 View all Garages..7
 Remove Garage.....8                    
-Close Program....'q'
+Close Program....'q' or 'quit'
 """+line2)
 
 # parses string to create and return a Car object
@@ -60,22 +60,25 @@ while True:
     #os.system('cls||clear')# clears terminal
     
     if userInput == "1":# add car
-        carInput = input("Enter year, make and model of new car: ")
-        carInput = carInput.split() #converts string into an array
-        if len(carInput) < 3 or len(carInput) > 3:
-            print("input is too short or too long! Returning to menu...\n")
-            #break # make custom exception to throw
+        if fileName == "empty":
+            print("A garage has not been loaded!\n")
         else:
-            try:
-                int(carInput[0])
-                car = Car(carInput[0], carInput[1].capitalize(), carInput[2].capitalize())
-                currentGarage.append(car)
-                print(car," has been created!\n")
-            except ValueError as e:
-                print(str(e) +" is not an integer!")
+            carInput = input("Enter year, make and model of new car: ")
+            carInput = carInput.split() #converts string into an array
+            if len(carInput) < 3 or len(carInput) > 3:
+                print("input is too short or too long! Returning to menu...\n")
+                #break # make custom exception to throw
+            else:
+                try:
+                    int(carInput[0])
+                    car = Car(carInput[0], carInput[1].capitalize(), carInput[2].capitalize())
+                    currentGarage.append(car)
+                    print(car," has been created!\n")
+                except ValueError as e:
+                    print(str(e) +" is not an integer!")
         
     elif userInput == "2":# remove car
-        c = 1
+        c = 1 #serves as counter of cars in garage
         if len(currentGarage) > 0:
             for x in currentGarage:
                 print(str(c)+"......",x)
