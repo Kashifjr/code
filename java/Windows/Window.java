@@ -13,6 +13,15 @@ public class Window implements ActionListener {
     private JPanel appPanel;
     // Where the components controlled by the CardLayout are initialized:
     // Create the "cards".
+    // can make private...
+    protected JTextField textField;
+    protected JTextField cubeField;
+
+    // calculate area of a cube
+    public double Cube(double side) {
+        double result = Math.pow(side, 3.0);
+        return result;
+    }
 
     private void initWindow() {
         JFrame f = new JFrame();// creating instance of JFrame
@@ -30,6 +39,15 @@ public class Window implements ActionListener {
         appPanel.add(Name, "1");
         appPanel.add(Cars, "2");
         appPanel.add(Cube, "3");
+
+        // add text box to Car panel
+        textField = new JTextField(15);
+        textField.addActionListener(this);
+        Cars.add(textField);
+        // add text box to Cube panel
+        cubeField = new JTextField(15);
+        cubeField.addActionListener(this);
+        Cube.add(cubeField);
 
         // creates menu Jpanel with the layout manager Spring Layout
         SpringLayout spring = new SpringLayout();
@@ -93,6 +111,14 @@ public class Window implements ActionListener {
             default:
                 break;
         }
+
+        // car text field handler
+        String car = textField.getText();
+        System.out.println(car);
+        // cube text field handler
+        String side = textField.getText();
+        // double answer = Cube(Double.parseDouble(side));
+        // System.out.println(answer);
     }
 
     public static void main(String[] args) {
