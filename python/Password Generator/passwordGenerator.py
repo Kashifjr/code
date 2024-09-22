@@ -33,7 +33,7 @@ password = ""
 print("||||||Password Generator||||||")
 while(True):
 
-    print("Passwords must be at least 8 characters long and will contain 2\nspecial character and 1 digit.")
+    print("Passwords must be at least 8 characters long and will contain 2\nspecial characters and 1 digit.")
     length = input("How many characters would you like the password to have?: ")
     try:
         length = int(length)
