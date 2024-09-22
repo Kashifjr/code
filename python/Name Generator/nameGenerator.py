@@ -42,6 +42,11 @@ for x in range(n): #shuffle arrays n times
     random.shuffle(firstNames)
     random.shuffle(lastNames)
 
-name = firstNames[ranNum0].capitalize() + lastNames[ranNum1].capitalize()
+first = firstNames[ranNum0].capitalize()
+last = lastNames[ranNum1].capitalize()
+first = first.replace("\n", "")
+last = last.replace("\n", "")
 
-print("Random generated name is: \n" + name)
+name = first + " " + last
+
+print("Random generated name is: " + name + "\n")
