@@ -89,7 +89,7 @@ def main():
         user_option = input("Choose an option: ")
         # Enter amazon URL  
         if user_option == "1":
-            user_url = input("Enter the URL of the Amazon the item you'd like to scrape: \n")
+            user_url = input("\nEnter the URL of the Amazon the item you'd like to scrape: \n")
             amazon_url = "www.amazon.com"
             if amazon_url in user_url:
                 check_price(user_url)
