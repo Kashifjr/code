@@ -8,10 +8,10 @@ from bs4 import BeautifulSoup
 # current price.
 # 
 # 
-# ===== Features to Add ===
-# *Add ability to store this information into a file. Excel sheet and other data 
+# ===== Features to Add ====
+# *Add ability to store this information into a file(json). Excel sheet and other data 
 # structures.
-# *Enter a search and return for the 1st result from the amazon site itself.
+# *[x]Enter a search and return for the 1st result from the amazon site itself. 
 # 
 
 # Debug Amazon link
@@ -46,7 +46,7 @@ def check_price(url):
     # format item name and cost
     string1 = "\nThe item is: "
     string2 = "The current price is: "
-    print(string1 + title+"\n"+ string2 +price + "\n")
+    print(string1 + title+"\n"+ string2 +price + "\17:30n")
 
 # Function to get the first search result URL
 def get_first_amazon_result(query):
@@ -113,5 +113,5 @@ def main():
             print("closing program...")
             break
           
-# Call main Method
+# Call main function
 main()
