@@ -1,0 +1,22 @@
+[
+    {
+        "firstName": "John",
+        "lastName": "Smith",
+        "address": {
+            "streetAddress": "21 2nd Street",
+            "city": "New York",
+            "state": "NY",
+            "postalCode": 10021
+        }
+    },
+    {
+        "firstName": "Alicia",
+        "lastName": "Roberts",
+        "address": {
+            "streetAddress": "154 Sycle Lane",
+            "city": "Ohio",
+            "state": "OH",
+            "postalCode": 15479
+        }
+    }
+]
