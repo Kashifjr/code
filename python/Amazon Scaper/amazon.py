@@ -69,7 +69,7 @@ def send_mail():
     server.login('ENTER THE USER', 'ENTER THE PASSWORD')
 
     subject = "Lipo 3d Batteries are is lower!"
-    body = "chek teh link boii!!! https://www.amazon.com/Zeee-Batteries-Connector-Helicopter-Quadcopter/dp/B0972RKJDS/ref=sr_1_1_sspa?dib=eyJ2IjoiMSJ9.5hKdpgWW2pJIzFBYoEmgISa8YfivcQIkJiiYH7x2uDDVHLid7O8FMbysu-IiGrTV9hhRztodkGYm1v_c0SOzA7sBpslljoajW1kCj6avS_PDuNKYYzuJpKRyp4mPv0USdpLwJTpxNjcMO9gtva-c87XNwc4VDWOStPAnDmwZX23MhzEFXPQhh_fY6AiIyXZ52Zeqn_nuGLBpAmiUckFK2n0x80Z715O2l6dRF8lLfshUfvs0z8KWsREoD_7WpLEC7UOd5UkGRmehhRPqj68_d3R9ptdWKicIisOgPpxyFQA.zND7HOSj5xD-rF-xX42SjraeFo7oWVYG6zbs4B1enRM&dib_tag=se&keywords=3s+lipo+battery&qid=1727061514&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
+    body = "Check the link for the lower prices! https://www.amazon.com/Zeee-Batteries-Connector-Helicopter-Quadcopter/dp/B0972RKJDS/ref=sr_1_1_sspa?dib=eyJ2IjoiMSJ9.5hKdpgWW2pJIzFBYoEmgISa8YfivcQIkJiiYH7x2uDDVHLid7O8FMbysu-IiGrTV9hhRztodkGYm1v_c0SOzA7sBpslljoajW1kCj6avS_PDuNKYYzuJpKRyp4mPv0USdpLwJTpxNjcMO9gtva-c87XNwc4VDWOStPAnDmwZX23MhzEFXPQhh_fY6AiIyXZ52Zeqn_nuGLBpAmiUckFK2n0x80Z715O2l6dRF8lLfshUfvs0z8KWsREoD_7WpLEC7UOd5UkGRmehhRPqj68_d3R9ptdWKicIisOgPpxyFQA.zND7HOSj5xD-rF-xX42SjraeFo7oWVYG6zbs4B1enRM&dib_tag=se&keywords=3s+lipo+battery&qid=1727061514&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
 
     msg = f"subject: {subject}\n\n{body}"
 
